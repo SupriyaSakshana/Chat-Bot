@@ -1,0 +1,116 @@
+from google.adk.agents import LlmAgent
+from google.adk.tools import agent_tool
+from google.adk.tools.google_search_tool import GoogleSearchTool
+from google.adk.tools import url_context
+
+sub_agent__google_search_agent = LlmAgent(
+  name='SUB_AGENT__google_search_agent',
+  model='gemini-2.5-flash',
+  description=(
+      'Agent specialized in performing Google searches.'
+  ),
+  sub_agents=[],
+  instruction='Use the GoogleSearchTool to find information on the web.',
+  tools=[
+    GoogleSearchTool()
+  ],
+)
+sub_agent__url_context_agent = LlmAgent(
+  name='SUB_AGENT__url_context_agent',
+  model='gemini-2.5-flash',
+  description=(
+      'Agent specialized in fetching content from URLs.'
+  ),
+  sub_agents=[],
+  instruction='Use the UrlContextTool to retrieve content from provided URLs.',
+  tools=[
+    url_context
+  ],
+)
+subagent = LlmAgent(
+  name='subagent',
+  model='gemini-2.5-flash',
+  description=(
+      'Internal analytics agent responsible for tracking chatbot usage, performance metrics, and conversation trends.\n\n'
+  ),
+  sub_agents=[],
+  instruction='Counting users\n\nTracking intent\n\nTracking sentiment\n\nMeasuring response efficiency\n\nGenerating insights for dashboards',
+  tools=[
+    agent_tool.AgentTool(agent=sub_agent__google_search_agent),
+    agent_tool.AgentTool(agent=sub_agent__url_context_agent)
+  ],
+)
+subagent_google_search_agent = LlmAgent(
+  name='Subagent_google_search_agent',
+  model='gemini-2.5-flash',
+  description=(
+      'Agent specialized in performing Google searches.'
+  ),
+  sub_agents=[],
+  instruction='Use the GoogleSearchTool to find information on the web.',
+  tools=[
+    GoogleSearchTool()
+  ],
+)
+subagent_url_context_agent = LlmAgent(
+  name='Subagent_url_context_agent',
+  model='gemini-2.5-flash',
+  description=(
+      'Agent specialized in fetching content from URLs.'
+  ),
+  sub_agents=[],
+  instruction='Use the UrlContextTool to retrieve content from provided URLs.',
+  tools=[
+    url_context
+  ],
+)
+subagent_2 = LlmAgent(
+  name='subagent_2',
+  model='gemini-2.5-flash',
+  description=(
+      'responsible for processing image and other file inputs'
+  ),
+  sub_agents=[],
+  instruction='- Process the provided image, textual file formats.\n- Gives response accordingly.',
+  tools=[
+    agent_tool.AgentTool(agent=subagent_google_search_agent),
+    agent_tool.AgentTool(agent=subagent_url_context_agent)
+  ],
+)
+vahan_mitra_google_search_agent = LlmAgent(
+  name='Vahan_Mitra_google_search_agent',
+  model='gemini-2.5-flash',
+  description=(
+      'Agent specialized in performing Google searches.'
+  ),
+  sub_agents=[],
+  instruction='Use the GoogleSearchTool to find information on the web.',
+  tools=[
+    GoogleSearchTool()
+  ],
+)
+vahan_mitra_url_context_agent = LlmAgent(
+  name='Vahan_Mitra_url_context_agent',
+  model='gemini-2.5-flash',
+  description=(
+      'Agent specialized in fetching content from URLs.'
+  ),
+  sub_agents=[],
+  instruction='Use the UrlContextTool to retrieve content from provided URLs.',
+  tools=[
+    url_context
+  ],
+)
+root_agent = LlmAgent(
+  name='Vahan_Mitra',
+  model='gemini-2.5-flash',
+  description=(
+      'An AI car Expert'
+  ),
+  sub_agents=[subagent, subagent_2],
+  instruction='-Specialized in giving car (sold and serviced in Indian region) related knowledge and information.\n-Based on Delhi NCR locations only, should ask user his/her location for better help and support.\n-Gives advices for car maintenance, serviceability\n- Gives support or guidance over technical or mechanical car related issue.\n- Gives advice on car safety and emergency.\n- Detects user sentiment and adjusts responses based on sentiment analysis. \n- Don\'t entertain other off topic queries other than subagent.\n\n',
+  tools=[
+    agent_tool.AgentTool(agent=vahan_mitra_google_search_agent),
+    agent_tool.AgentTool(agent=vahan_mitra_url_context_agent)
+  ],
+)
