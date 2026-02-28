@@ -1,9 +1,10 @@
 # Vahan Mitra Chat-Bot
 
 
-Vahan Mitra is a multi-agent AI car assistant built using Google Agent Development Kit (ADK) and Gemini models.
-
-It is designed to provide end-to-end car-related support for the Indian market (especially Delhi NCR), covering vehicle sales guidance, service and maintenance assistance, and safety & emergency protocols, while also tracking user interactions, intent, sentiment, and performance metrics through dedicated analytics agents. 
+Vahan Mitra is a cloud-native AI chatbot deployed on Google Cloud. The backend is built using FastAPI and containerized with Docker. It is deployed on Cloud Run for serverless scaling. The AI processing is handled by Vertex AI, which hosts the Gemini model for generating intelligent responses. All structured logs are routed through Cloud Logging into BigQuery, and analytics dashboards are created using Looker Studio for monitoring performance and user activity.
 
 
-<img width="739" height="376" alt="image" src="https://github.com/user-attachments/assets/5cbf5893-11b7-4ce7-8c94-8c7cc77bbb52" />
+<img width="831" height="415" alt="image" src="https://github.com/user-attachments/assets/6bdaa700-0078-42a7-9b31-c57d47eab968" />
+
+
+
